@@ -1,0 +1,9 @@
+FROM satyajitghana/pytorch:2.3.1
+
+RUN pip install requests
+
+WORKDIR /opt/mount
+
+COPY infer.py net.py /opt/mount/
+
+CMD ["python", "infer.py"]

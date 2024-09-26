@@ -1,0 +1,36 @@
+services:
+    train:
+        # train service
+        build:
+            context: model-train
+            dockerfile: Dockerfile.train
+        volumes:
+            - ./data:/opt/mount/data
+            - mnist:/opt/mount/model
+    evaluate:
+        # eval service
+        build:
+            context: model-eval
+            dockerfile: Dockerfile.eval
+        volumes:
+            - ./data:/opt/mount/data
+            - mnist:/opt/mount/model            
+        depends_on:
+            - train
+
+    infer:
+        # infer service
+        build:
+            context: model-infer
+            dockerfile: Dockerfile.infer
+        volumes:
+            - ./data:/opt/mount/data
+            - mnist:/opt/mount/model
+        network_mode: "host"
+        depends_on:
+            - train        
+        restart: no
+
+volumes:
+    # create volumes here
+    mnist:

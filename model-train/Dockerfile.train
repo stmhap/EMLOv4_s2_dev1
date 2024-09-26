@@ -1,0 +1,14 @@
+# Use a base image with Python and necessary dependencies
+FROM satyajitghana/pytorch:2.3.1
+
+# Set the working directory
+WORKDIR /opt/mount
+
+# Create the model directory
+RUN mkdir -p /opt/mount/model
+
+# Copy train.py into the working directory
+COPY train.py net.py /opt/mount/
+
+# Command to run the training script
+CMD ["python", "train.py"]

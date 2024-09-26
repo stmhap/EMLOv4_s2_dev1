@@ -1,0 +1,7 @@
+FROM satyajitghana/pytorch:2.3.1
+
+WORKDIR /opt/mount
+
+COPY evaluate.py net.py /opt/mount/
+
+CMD ["python", "evaluate.py"]
